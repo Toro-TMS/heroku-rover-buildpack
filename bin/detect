@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo 'heroku-rover-buildpack'
+exit 0
