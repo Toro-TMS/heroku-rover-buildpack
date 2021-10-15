@@ -5,5 +5,5 @@
 testCompileSuccessful() {
   compile
   assertCapturedSuccess
-  assertCaptured "Rover "
+  assertCaptured "version: Rover "
 }

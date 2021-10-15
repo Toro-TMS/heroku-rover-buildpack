@@ -1,20 +1,22 @@
 #!/usr/bin/env bash
 
-curl -sSL https://rover.apollo.dev/nix/latest | sh 2> install_output.txt
+curl -sSL https://rover.apollo.dev/nix/latest | sh 2> installation.txt
 
 if [ $? -ne 0 ]; then
   exit 1
 fi
 
-VERSION=$("$HOME/.rover/bin/rover" --version)
-echo "-----> heroku-rover-buildpack: Installed to $HOME/.rover (version: $VERSION)"
+mkdir -p "$1/vendor/bin"
+cp "$HOME/.rover/bin/rover" "$1/vendor/bin"
+
+echo "-----> heroku-rover-buildpack: Installed to $1/vendor/bin (version: $("$1/vendor/bin/rover" --version))"
 
 # Adding rover to the PATH of the running app
 
 mkdir -p "$1/.profile.d/"
 
-cat <<EOF >"$1"/.profile.d/rover.sh
-export PATH="\$PATH:\$HOME/.rover/bin"
+cat << EOF > "$1"/.profile.d/rover.sh
+export PATH="\$PATH:$1/vendor/bin"
 EOF
 
 exit 0
