@@ -6,17 +6,16 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-mkdir -p "$1/vendor/bin"
-cp "$HOME/.rover/bin/rover" "$1/vendor/bin"
+cp -a "$HOME/.rover" "$1"
 
-echo "-----> heroku-rover-buildpack: Installed to $1/vendor/bin (version: $("$1/vendor/bin/rover" --version))"
+echo "-----> heroku-rover-buildpack: Installed to $1/.rover (version: $("$1/.rover/bin/rover" --version))"
 
 # Adding rover to the PATH of the running app
 
 mkdir -p "$1/.profile.d/"
 
 cat << EOF > "$1"/.profile.d/rover.sh
-export PATH="\$PATH:$1/vendor/bin"
+export PATH="\$PATH:\$HOME/.rover/bin"
 EOF
 
 exit 0
