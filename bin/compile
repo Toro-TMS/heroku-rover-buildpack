@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-curl -sSL https://rover.apollo.dev/nix/latest | sh
+curl -sSL https://rover.apollo.dev/nix/latest | sh 2> install_output.txt
 
 if [ $? -ne 0 ]; then
   exit 1
